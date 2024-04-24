@@ -1,33 +1,14 @@
+"use client";
+
 import Link from 'next/link'
-import { List, ListItem } from "@mui/material";
-import Image from 'next/image';
-import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Button, List, ListItem } from "@mui/material";
+import { Clock, clockType } from './clock';
+import { useState } from 'react';
+// import { useLocalStorage } from '@uidotdev/usehooks';
 
-const data01 = [
-    { name: 'Group C', value: 100, on: false },
-    { name: 'Group D', value: 100, on: true },
-    { name: 'Group A', value: 100, on: true },
-    { name: 'Group B', value: 100, on: true },
-];
-
-const Clock = () => {
-    const radius = 100;
-    const radRatio = .86
-    return <div style={{ height: radius * 2, width: radius * 2, position: "relative" }}>
-        <ResponsiveContainer width="100%" height="100%" style={{ transform: "rotate(-90deg)" }}>
-            <PieChart width={100} height={100} >
-                <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={radRatio * radius} fill="#000" >
-                    {data01.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.on ? "red" : "white"} stroke={"#000"} />
-                    ))}
-                </Pie>
-            </PieChart>
-        </ResponsiveContainer>
-        <img src="/clock_outline.png" alt="clock" style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0 }} />
-    </div>
-}
-
-export default function Clocks() {
+const Clocks = () => {
+    // const [clocks, setClocks] = useLocalStorage<clockType[]>("clockData", [])
+    const [clocks, setClocks] = useState<clockType[]>( [])
     return (
         <div>
             CLOCKS!
@@ -39,7 +20,18 @@ export default function Clocks() {
                     <Link href="/clocks">Clocks</Link>
                 </ListItem>
             </List>
-            <Clock />
+            {clocks.map(
+                (clock, index) => <Clock
+                    key={clock.title + clock.size + clock.filled}
+                    clock={clock}
+                    setClock={(newClock) => {
+                        clocks[index] = newClock;
+                        setClocks([...clocks])
+                    }}
+                />)}
+            <Button onClick={() => setClocks([...clocks, { filled: 0, size: 4, title: "New Clock" }])}>Add Clock</Button>
         </div>
     );
 }
+
+export default Clocks;
