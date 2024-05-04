@@ -4,16 +4,17 @@ import { useState } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 // eslint-disable-next-line @next/next/no-img-element
-const img = <img src="https://raw.githubusercontent.com/amcilraithwustl/rpg-tools/main/public/clock_outline.png" alt="clock" style={
-    {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        top: 0,
-        left: 0,
-        pointerEvents: 'none',
-    }
-} />
+const img = <img src="https://raw.githubusercontent.com/amcilraithwustl/rpg-tools/main/public/clock_outline.png" alt="clock"
+    style={
+        {
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            pointerEvents: 'none',
+        }
+    } />
 
 export type clockType = { size: number, filled: number, title: string, uuid: string, color: string }
 export const Clock = ({ clock: { size, filled, title, ...clock }, setClock, deleteClock }: { clock: clockType, setClock: (arg: clockType) => void, deleteClock: () => void }) => {
