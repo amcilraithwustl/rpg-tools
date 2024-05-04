@@ -11,7 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.15",
+    "@mui/icons-material": "^5.15.16",
+    "@mui/material": "^5.15.16",
     "@uidotdev/usehooks": "^2.4.1",
     "next": "14.2.2",
     "react": "^18",
