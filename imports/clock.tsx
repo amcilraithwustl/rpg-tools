@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 // eslint-disable-next-line @next/next/no-img-element
-const img = <img src="/clock_outline.png" alt="clock" style={
+const img = <img src="https://raw.githubusercontent.com/amcilraithwustl/rpg-tools/main/public/clock_outline.png" alt="clock" style={
     {
         position: 'absolute',
         width: '100%',
