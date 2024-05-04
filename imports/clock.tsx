@@ -17,7 +17,8 @@ export const clockOutline = <img src="https://raw.githubusercontent.com/amcilrai
     } />
 export const clockRadius = 80;
 export type clockType = { size: number, filled: number, title: string, uuid: string, color: string }
-export const Clock = ({ clock: { size, filled, title, ...clock }, setClock, deleteClock }: { clock: clockType, setClock: (arg: clockType) => void, deleteClock: () => void }) => {
+export const Clock = ({ clock: { size, filled: f, title, ...clock }, setClock, deleteClock }: { clock: clockType, setClock: (arg: clockType) => void, deleteClock: () => void }) => {
+    const filled = size > f ? f : size;
     const on = { value: 1, on: true };
     const off = { value: 1, on: false }
     const data01 = [...[...new Array(size - filled)].map(() => off), ...[...new Array(filled)].map(() => on)];
@@ -87,9 +88,9 @@ export const Clock = ({ clock: { size, filled, title, ...clock }, setClock, dele
                 >{n}</MenuItem>)}
                 <Divider />
                 {([
-                    ["gray", grey[600]],
-                    ["red", red[600]],
-                    ["green", green[600]],
+                    ["Gray", grey[600]],
+                    ["Red", red[600]],
+                    ["Green", green[600]],
                 ] as const).map(([name, color]) =>
                     <MenuItem key={color} onClick={() => { setContextMenu(null); setClock({ title, size, filled, ...clock, color }) }} >{name}</MenuItem>)}
                 <Divider />
