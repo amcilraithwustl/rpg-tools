@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { AppBar, Button, Container, List, ListItem, Paper, TextField } from "@mui/material";
+import { AppBar, Button, Container, List, ListItem, Paper, Stack, TextField } from "@mui/material";
 import { Clock, clockOutline, clockRadius, clockType } from '../../imports/clock';
 
 import * as React from 'react';
@@ -34,14 +34,6 @@ const Clocks = () => {
     const theme = useTheme();
     return (
         <Container>
-            <List>
-                <ListItem>
-                    <Link href="/">Home</Link>
-                </ListItem>
-                <ListItem>
-                    <Link href="/clocks">Clocks</Link>
-                </ListItem>
-            </List>
             <Grid container>
 
                 {clocks.map(
@@ -105,11 +97,21 @@ export default function Dashboard() {
                         >
                             Dashboard
                         </Typography>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+                        <Stack direction="row" spacing={1} height="100%">
+
+                            <Grid item>
+                                <Link href="/">Home</Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="/clocks">Clocks</Link>
+                            </Grid>
+
+                            <IconButton color="inherit">
+                                <Badge badgeContent={4} color="secondary">
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                        </Stack>
                     </Toolbar>
                 </AppBar>
                 <Box
