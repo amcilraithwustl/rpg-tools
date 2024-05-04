@@ -1,10 +1,6 @@
-"use client";
-
 import Link from 'next/link'
-import { AppBar, Button, Container, List, ListItem, Paper } from "@mui/material";
-import { Clock, clockType } from '../../imports/clock';
-import { useState } from 'react';
-// import { useLocalStorage } from '@uidotdev/usehooks';
+import { AppBar, Button, Container, List, ListItem, Paper, TextField } from "@mui/material";
+import { Clock, clockOutline, clockRadius, clockType } from '../../imports/clock';
 
 import * as React from 'react';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
@@ -18,7 +14,8 @@ import Grid from '@mui/material/Grid';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { theme } from '@/imports/theme';
-
+import { useLocalStorage } from 'usehooks-ts';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
 function makeid(length: number) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -32,8 +29,8 @@ function makeid(length: number) {
 }
 
 const Clocks = () => {
-    // const [clocks, setClocks] = useLocalStorage<clockType[]>("clockData", [])
-    const [clocks, setClocks] = useState<clockType[]>([])
+    const [clocks, setClocks] = useLocalStorage<clockType[]>("clockData", [], { initializeWithValue: false })
+    // const [clocks, setClocks] = useState<clockType[]>([])
     const theme = useTheme();
     return (
         <Container>
@@ -55,11 +52,18 @@ const Clocks = () => {
                             clocks[index] = newClock;
                             setClocks([...clocks])
                         }}
-                        deleteClock={()=>setClocks(c=>c.filter(i=>i.uuid !== clock.uuid))}
+                        deleteClock={() => setClocks(c => c.filter(i => i.uuid !== clock.uuid))}
                     />)}
+                <Grid item display="flex" justifyContent={"center"} alignItems={"flex-end"}>
+                    <IconButton size={"large"} onClick={() => setClocks([...clocks, {
+                        filled: 0, size: 4, title: "", uuid: makeid(12),
+                        color: theme.palette.grey[600]
+                    }])}>
+                        <MoreTimeIcon />
+                    </IconButton>
+                </Grid>
             </Grid>
-            <Button onClick={() => setClocks([...clocks, { filled: 0, size: 4, title: "New Clock", uuid: makeid(12), color:theme.palette.grey[600] }])}>Add Clock</Button>
-        </Container>
+        </Container >
     );
 }
 
