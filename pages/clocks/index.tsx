@@ -7,7 +7,7 @@ import { useState } from 'react';
 // import { useLocalStorage } from '@uidotdev/usehooks';
 
 import * as React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, useTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -34,6 +34,7 @@ function makeid(length: number) {
 const Clocks = () => {
     // const [clocks, setClocks] = useLocalStorage<clockType[]>("clockData", [])
     const [clocks, setClocks] = useState<clockType[]>([])
+    const theme = useTheme();
     return (
         <Container>
             <List>
@@ -54,9 +55,10 @@ const Clocks = () => {
                             clocks[index] = newClock;
                             setClocks([...clocks])
                         }}
+                        deleteClock={()=>setClocks(c=>c.filter(i=>i.uuid !== clock.uuid))}
                     />)}
             </Grid>
-            <Button onClick={() => setClocks([...clocks, { filled: 0, size: 4, title: "New Clock", uuid: makeid(12) }])}>Add Clock</Button>
+            <Button onClick={() => setClocks([...clocks, { filled: 0, size: 4, title: "New Clock", uuid: makeid(12), color:theme.palette.grey[600] }])}>Add Clock</Button>
         </Container>
     );
 }
