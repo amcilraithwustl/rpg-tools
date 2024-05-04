@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { AppBar, Button, Container, List, ListItem, Paper } from "@mui/material";
-import { Clock, clockType } from './clock';
+import { Clock, clockType } from '../../imports/clock';
 import { useState } from 'react';
 // import { useLocalStorage } from '@uidotdev/usehooks';
 

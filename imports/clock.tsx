@@ -106,4 +106,3 @@ export const Clock = ({ clock: { size, filled, title, ...clock }, setClock, dele
         }} />
     </Grid>
 }
-
